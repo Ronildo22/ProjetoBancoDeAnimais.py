@@ -11,17 +11,8 @@ try:
             self.familia = familia
             self.especie = especie
             self.cor = cor
-            self.reporducao = reproducao
+            self.reproducao = reproducao
             self.voa = voa
-
-        def comer(self):
-            print(f'O pinguin {self.nome} está COMENDO')
-
-        def voar(self):
-            if self.voa:
-                print("Esse passaro voa!!")
-            else:
-                print("Esse passaro NAO voa!!")
 
 
 except Exception as e:

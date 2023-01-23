@@ -10,7 +10,7 @@ try:
             self.familia = familia
             self.especie = especie
             self.cor = cor
-            self.reporducao = reproducao
+            self.reproducao = reproducao
 
 
 except Exception as e:

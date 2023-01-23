@@ -26,17 +26,6 @@ try:
         def preco(self, valor):
             self.__preco = valor
 
-        # Getter
-        @property
-        def listar_animais(self):
-            return self.__listaAnimal
-
-        # Setter
-        @listar_animais.setter
-        def listar_animais(self, valor):
-            self.__listaAnimal = valor
-            # self.__listaAnimal.update({'animais': {animal, nome, familia, especie, cor, preco}})
-
         # X-- Vai trazer apenas o "self.__nome" instanciodo no objeto
         #           (por conta do private do Encapsolamento) --X
 
@@ -54,7 +43,9 @@ try:
 
         @staticmethod
         def gera_id():
+
             # xX-X  Fazer um Auto Incremento para gerar um Id corretamente X-Xx
+
             id = random.randint(1, 100)
             return id
 
