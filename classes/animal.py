@@ -8,7 +8,7 @@ try:
         anoAtual = '2023'
 
         # Metodo construtor OU Metodo de instancia
-        def __init__(self, nome, preco: float):
+        def __init__(self, nome, preco):
             self.__nome = nome
             self.__preco = preco
             self.__listaAnimal = {}
@@ -44,7 +44,7 @@ try:
         @staticmethod
         def gera_id():
 
-            # xX-X  Fazer um Auto Incremento para gerar um Id corretamente X-Xx
+            # xX-X Fazer um Auto Incremento para gerar um Id corretamente X-Xx
 
             id = random.randint(1, 100)
             return id
@@ -53,7 +53,7 @@ try:
     # bd = BancoDeDadosAnimais('João', 50.0)
 
     # # class do metodo
-    # print(f'MEtodo Class:  {bd.ano_nascimento(2003)}')
+    # print(f'Metodo Class:  {bd.ano_nascimento(2003)}')
 
     # # static metodo
     # print(f'Static: {bd.gera_id()}')

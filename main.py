@@ -2,110 +2,165 @@ from classes import animal
 from classes import pinguim
 from classes import camaleao
 from colorama import init, Fore
+import locale
 
 init()
 
 try:
 
+    # xX-X CRIAR FOR para automatizar do banco X-Xx
+
     # --------Instancia da Classe (Objetos)--------
-    pingu = pinguim.Pinguim('Pinguim', 'Pingu', 'Ave', 'Imperador', 'Preto e Branco', 'Ovipara', 400.50, False)
+
+    pingu = pinguim.Pinguim('Pinguim', 'Pingu', 'Ave', 'Imperador', 'Preto e Branco', 'Oviparo', 1200.50, False)
     pascal = camaleao.Camaleao('Camaleão', 'Pascal', 'Reptel', 'Furcifer', 'Multicor', 'Oviparo', 280.75)
     animais = animal.BancoDeDadosAnimais
 
-    dicioAnimal = {"Id": None, "Animal": None, "Nome": None, "Familia": None, "Especie": None,
-                   "Cor": None, "Reprodução": None, "Preço": None}
+    dadosPinguim = (("Id", pingu.gera_id()), ("Animal", pingu.animal), ("Nome", pingu.nome),
+                    ("Familia", pingu.familia), ("Especie", pingu.especie), ("Cor", pingu.cor),
+                    ("Reprodução", pingu.reproducao), ("Preço", f'R$ {pingu.preco:.2f}'))
 
-    # xX-X CRIAR FOR para automatizar do banco X-Xx
+    dadosCamaleao = (("Id", pascal.gera_id()), ("Animal", pascal.animal), ("Nome", pascal.nome),
+                     ("Familia", pascal.familia), ("Especie", pascal.especie), ("Cor", pascal.cor),
+                     ("Reprodução", pascal.reproducao), ("Preço", f'R$ {pascal.preco:.2f}'))
 
-    id = pingu.gera_id()
+    dictPingim = dict((y, x) for y, x in dadosPinguim)
+    dictCamaleao = dict((y, x) for y, x in dadosCamaleao)
 
-    Animais = (("Id", pingu.gera_id()), ("Animal", pingu.animal), ("Nome", pingu.nome), ("Familia", pingu.familia),
-               ("Especie", pingu.especie), ("Cor", pingu.cor), ("Reprodução", pingu.reproducao),
-               ("Preço", f'R$ {pingu.preco:.2f}'))
-
-    # convertendo para dicionario
-
-    dicionario = dict((y, x) for y, x in Animais)
-    # print(type(dicionario))
-    # print(dicionario['Id'])
-    pesquisaQuand = 0
-    # xX-X SISTEMA PARA CONSULTAR OS ANIMAIS (input) X-Xx
-
-    pesquisa = 1
-    while pesquisa != 0:
+    pesquisaCaracteristicas = 1
+    ancoraEscolha_animais = 1
+    while pesquisaCaracteristicas != 0:
         verificacao = False
+        verificacao2 = False
         while not verificacao:
 
-            pesquisasQuand = input("Qual a quantidade de consultas você deseja fazer? ")
+            pesquisasQuand = input("\nQual a quantidade de consultas você deseja fazer?"
+                                   "\n\nDIGITE 0 p/ Sair\n\nDigite Aqui: ")
+
             verificacao = pesquisasQuand.isnumeric()
 
+            if pesquisasQuand == '0':
+                exit()
+
+        while not verificacao2:
+            pesquisaAnimal = input("\nQual animal você deseja consultar: \n"
+                                   "1- Piguim\n"
+                                   "2- Camaleão\n\n"
+                                   "DIGITE 0 p/ Sair\n\nDigite Aqui: ")
+
+            if pesquisaAnimal == '1':
+                tokenAnimal = 'pinguim'
+                verificacao2 = pesquisaAnimal.isdigit()
+
+            elif pesquisaAnimal == '2':
+                tokenAnimal = 'camaleão'
+                verificacao2 = pesquisaAnimal.isdigit()
+
+            elif pesquisaAnimal == '0':
+                exit()
+
+            else:
+                print(Fore.RED + '\nDigite um número reverente a consulta!!!' + Fore.RESET)
+
         i = 1
-        lista = []
+        listaConsulta = []
         listaIdentificadores = []
-        while i <= int(pesquisasQuand) and pesquisa != 0:
+        indicadorConsultas = int(pesquisasQuand)
 
-            pesquisa = input("Escolha qual tipo de consulta vc deseja fazer: " + Fore.YELLOW + "\n"
-                                                                                               "1- Id\t\t"
-                                                                                               "2- Animal\t\t"
-                                                                                               "3- Nome\t\t\t\t"
-                                                                                               "4- Familia""\n"
-                                                                                               "5- Especie\t"
-                                                                                               "6- Cor\t\t\t"
-                                                                                               "7- Reprodução\t\t"
-                                                                                               "8- Preço\n\n" +
-                             Fore.RESET + "APERTE 0 p/ Sair\n\nDigite Aqui: ")
+        while i <= int(pesquisasQuand) and pesquisaCaracteristicas != 0:
 
-            if pesquisa == '1':
-                lista.append('Id')
+            print(f'\nQuantidade de consultas restantes: {indicadorConsultas}')
+
+            pesquisaCaracteristicas = input("\nEscolha qual tipo de consulta vc deseja fazer: "
+                                            + Fore.YELLOW + "\n""1- Id\t\t"
+                                                                "2- Animal\t\t"
+                                                                "3- Nome\t\t\t\t"
+                                                                "4- Familia""\n"
+                                                                "5- Especie\t"
+                                                                "6- Cor\t\t\t"
+                                                                "7- Reprodução\t\t"
+                                                                "8- Preço\n\n" + Fore.RESET +
+                                            "DIGITE 0 p/ Sair\n\nDigite Aqui: ")
+
+            if pesquisaCaracteristicas == '1':
+                listaConsulta.append('Id')
                 listaIdentificadores.append('Id')
 
-            if pesquisa == '2':
-                lista.append('Animal')
+            elif pesquisaCaracteristicas == '2':
+                listaConsulta.append('Animal')
                 listaIdentificadores.append('Animal')
 
-            if pesquisa == '3':
-                lista.append('Nome')
+            elif pesquisaCaracteristicas == '3':
+                listaConsulta.append('Nome')
                 listaIdentificadores.append('Nome')
 
-            if pesquisa == '4':
-                lista.append('Familia')
+            elif pesquisaCaracteristicas == '4':
+                listaConsulta.append('Familia')
                 listaIdentificadores.append('Familia')
 
-            if pesquisa == '5':
-                lista.append('Especie')
+            elif pesquisaCaracteristicas == '5':
+                listaConsulta.append('Especie')
                 listaIdentificadores.append('Especie')
 
-            if pesquisa == '6':
-                lista.append('Cor')
+            elif pesquisaCaracteristicas == '6':
+                listaConsulta.append('Cor')
                 listaIdentificadores.append('Cor')
 
-            if pesquisa == '7':
-                lista.append('Reprodução')
+            elif pesquisaCaracteristicas == '7':
+                listaConsulta.append('Reprodução')
                 listaIdentificadores.append('Reprodução')
 
-            if pesquisa == '8':
-                lista.append('Preço')
+            elif pesquisaCaracteristicas == '8':
+                listaConsulta.append('Preço')
                 listaIdentificadores.append('Preço')
 
-            pesquisa = int(pesquisa)
+            else:
+                if pesquisaCaracteristicas == '0':
+                    pass
+                else:
+                    print(Fore.RED+'\nDigite um número reverente a consulta!!!'+Fore.RESET)
+                    break
+
+            pesquisaCaracteristicas = int(pesquisaCaracteristicas)
             i = i + 1
+            indicadorConsultas = indicadorConsultas - 1
 
         print("CONSULTA...\n")
         i2 = 0
-        for valor in lista:
-            print(f'{listaIdentificadores[i2]}: {dicionario[valor]}')
-            i2 = i2 + 1
-        # dicionario['Id']
+
+
+        if tokenAnimal == 'pinguim':
+
+            for valor in listaConsulta:
+
+                if valor == 'Preço':
+
+                    # --convertendo o horario para o padrão brasileiro--
+                    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+                    var = locale.currency(pingu.preco, grouping=True)
+                    print(f'{listaIdentificadores[i2]}: {var}')
+
+                else:
+                    print(f'{listaIdentificadores[i2]}: {dictPingim[valor]}')
+
+                i2 = i2 + 1
+
+        if tokenAnimal == 'camaleão':
+
+            for valor in listaConsulta:
+
+                if valor == 'Preço':
+
+                    # --convertendo o horario para o padrão brasileiro--
+                    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+                    var = locale.currency(pingu.preco, grouping=True)
+                    print(f'{listaIdentificadores[i2]}: {var}')
+
+                else:
+                    print(f'{listaIdentificadores[i2]}: {dictCamaleao[valor]}')
+
+                i2 = i2 + 1
 
 
 except Exception as e:
     print(f'main: {e}')
-
-# ("Id", pascal.gera_id()),
-# ("Animal", pascal.animal),
-# ("Nome", pascal.nome),
-# ("Familia", pascal.familia),
-# ("Especie", pascal.especie),
-# ("Cor", pascal.cor),
-# ("Reprodução", pascal.reproducao),
-# ("Preço", f'R$ {pascal.preco:.2f}'))

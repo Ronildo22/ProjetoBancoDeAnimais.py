@@ -4,7 +4,7 @@ try:
 
     class Passaro(animal.BancoDeDadosAnimais):
 
-        def __init__(self, nome, preco: float, voa: bool):
+        def __init__(self, nome, preco, voa: bool):
             super().__init__(nome, preco)
             self.voa = voa
 

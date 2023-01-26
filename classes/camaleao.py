@@ -3,7 +3,7 @@ from classes import repteis
 try:
 
     class Camaleao(repteis.Repteis):
-        def __init__(self, animal, nome, familia, especie, cor, reproducao, preco: float):
+        def __init__(self, animal, nome, familia, especie, cor, reproducao, preco):
             super().__init__(nome, preco)
             self.animal = animal
             self.nome = nome
